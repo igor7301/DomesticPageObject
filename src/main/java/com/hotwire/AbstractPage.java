@@ -16,21 +16,35 @@ public abstract class AbstractPage {
     public static final int PAGE_WAIT = 2;
 
 
+
     public AbstractPage(WebDriver webDriverInstance) {
-        PageFactory.initElements(webDriverInstance, this);
+        PageFactory.initElements(
+                new CustomElementLocatorFactory(webDriverInstance, PAGE_WAIT),
+                this);
     }
 
     public AbstractPage(WebDriver webDriverInstance, By element) {
         new WebDriverWait(webDriverInstance, PAGE_WAIT)
                 .until(ExpectedConditions.visibilityOfElementLocated(element));
-        PageFactory.initElements(webDriverInstance, this);
+        PageFactory.initElements(
+                new CustomElementLocatorFactory(webDriverInstance, PAGE_WAIT),
+                this);
+    }
+
+    public AbstractPage(WebDriver webDriverInstance, Integer timeout) {
+        PageFactory.initElements(
+                new CustomElementLocatorFactory(webDriverInstance, timeout),
+                this);
+
     }
 
     public AbstractPage(WebDriver webDriverInstance, String tile) {
 
         //need to implement waiting for the page
         assert (webDriverInstance.getPageSource().contains(tile));
-        PageFactory.initElements(webDriverInstance, this);
+        PageFactory.initElements(
+                new CustomElementLocatorFactory(webDriverInstance, PAGE_WAIT),
+                this);
 
 
     }

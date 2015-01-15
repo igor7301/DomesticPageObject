@@ -24,6 +24,8 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = ".//*[@id='findHotelButton']")
     private WebElement startHotelSearch;
 
+    @FindBy(xpath = ".//*[@id='tyyyuuiton']")
+    private WebElement tmp;
 
     public HomePage(WebDriver webDriverInstance) {
         super(webDriverInstance, "tile.hotwire.home");
